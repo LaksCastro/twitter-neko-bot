@@ -1,8 +1,8 @@
-const NekoBotApiFactory = require("./nekobot");
-const PixivApiFactory = require("./pixiv");
+const { NekoBotApiFactory, PixivApiFactory } = require("./index");
 
 // const availableApis = [NekoBotApiFactory, PixivApiFactory];
-const availableApis = [PixivApiFactory];
+// const availableApis = [PixivApiFactory];
+const availableApis = [NekoBotApiFactory];
 
 const ImageApiFactory = () => {
   // ===========================================================================================

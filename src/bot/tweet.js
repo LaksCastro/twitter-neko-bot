@@ -1,4 +1,4 @@
-const TwitterReplyFactory = require("../services");
+const { TwitterReplyFactory } = require("../factory");
 
 const AutomaticTweetFactory = () => {
   const TwitterReply = TwitterReplyFactory();

@@ -1,8 +1,10 @@
-const FileManagerFactory = require("../file");
-const ConverterFactory = require("./converter");
-const ImageApiFactory = require("./image");
-const DownloadFactory = require("./download");
-const TwitterApiFactory = require("./twitter");
+const {
+  TwitterApiFactory,
+  DownloadFactory,
+  ImageApiFactory,
+  ConverterFactory,
+  FileManagerFactory,
+} = require("./index");
 
 const TwitterReplyFactory = () => {
   const ImageApi = ImageApiFactory();
