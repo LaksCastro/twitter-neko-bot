@@ -28,10 +28,19 @@ const TwitterReplyFactory = () => {
     if (!getStatus)
       throw new Error("Function to get tweet status is necessary");
 
+    let imagePath,
+      imageWebpPath = null;
+
     try {
       Console.write("1. Fetching image from API's...");
 
-      const { imagePath, imageWebpPath } = await ImageApi.get();
+      const {
+        imagePath: imgPath,
+        imageWebpPath: imgWebPath,
+      } = await ImageApi.get();
+
+      imagePath = imgPath;
+      imgWebPath = imgWebPath;
 
       Console.write("3. Converting image to webp...");
       await Converter.convert(imagePath, imageWebpPath, "webp");
