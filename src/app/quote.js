@@ -1,15 +1,28 @@
 let client = null;
+const replyTo = require("../services");
 
 // All Quotes Reply Feature Listener is here
-const WaifuBotQuoteFeature = () => {
-  console.log("ok");
+const WaifuBotQuoteFeature = (tweet) => {
+  const { user, id_str } = tweet;
+
+  replyTo(
+    (media) => ({
+      status: `@${user.name} #StayAtHome`,
+      media_ids: media.media_id_string,
+      in_reply_to_status_id: id_str,
+    }),
+    () => console.log("Respondi o usuário " + user.name)
+  );
 };
 
-const init = (clientInstance) => {
-  client = clientInstance;
+const init = () => {
+  client = require("../client").getClient();
 
-  // Init Waifu Listener for Quotes Event Feature
-  WaifuBotQuoteFeature();
+  const stream = client.stream("statuses/filter", {
+    track: ["@WaifuAwesomeBot"],
+  });
+
+  stream.on("tweet", WaifuBotQuoteFeature);
 };
 
 module.exports = init;
