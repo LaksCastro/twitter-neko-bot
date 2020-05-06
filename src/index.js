@@ -1,8 +1,10 @@
 const Twit = require("twit");
 const config = require("./config");
 
-const client = new Twit(config);
+const Client = require("./client");
+Client.set(new Twit(config));
 
-const bot = require("./app");
+const BotFactory = require("./bot");
+const Bot = BotFactory();
 
-bot(client);
+Bot.initialize();
