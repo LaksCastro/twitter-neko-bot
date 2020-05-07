@@ -12,10 +12,14 @@ const NekoBotApiFactory = () => {
   let getNekoBotEndpoint = (type) =>
     `https://nekobot.xyz/api/image?type=${type}`;
 
+  const api_name = "nekobot_api";
+
   const generateResult = async (response) => {
     const {
       data: { message: imageUrl, img_name: imageFilename },
     } = response;
+
+    const imageId = `${imageUrl}--${imageFilename}`;
 
     const imageName = imageFilename
       .split(".")
@@ -38,6 +42,9 @@ const NekoBotApiFactory = () => {
       imagePath,
       imageWebpPath,
       imageName,
+      imageId,
+      imageAuthor: null,
+      source: api_name,
     };
 
     return result;
@@ -62,6 +69,7 @@ const NekoBotApiFactory = () => {
   const public = {
     get,
     generateResult,
+    api_name,
   };
 
   return Object.freeze(public);

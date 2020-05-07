@@ -8,19 +8,59 @@ const HistoryFactory = () => {
     path.join(__dirname, "..", "history.json")
   );
 
-  const push = (imgData) => {
-    const currentHistory = JSON.parse(FileManager.read(historyPath));
+  // ===========================================================================================
+  // Private methods to get and set the history.json file content
+  // ===========================================================================================
+  const getCurrent = () => JSON.parse(FileManager.read(historyPath));
+  const setCurrent = (content) =>
+    FileManager.write(historyPath, JSON.stringify(content));
 
-    currentHistory.push(imgData);
+  // ===========================================================================================
+  // To get and set the history images
+  // ===========================================================================================
+  const getHistory = () => getCurrent().history;
+  const setHistory = (getNewHistory = (history) => history) => {
+    const current = getCurrent();
 
-    FileManager.write(historyPath, JSON.stringify(currentHistory));
+    const newHistory = getNewHistory(current.history);
+
+    setCurrent({
+      ...current,
+      history: newHistory,
+    });
   };
 
-  const remove = (imgData) => {};
+  // ===========================================================================================
+  // To get and set the history state
+  // ===========================================================================================
+  const getState = (name = null) => {
+    let current = getCurrent();
+
+    const state = current.state[name] || current.state;
+
+    return state;
+  };
+  const setState = (name, getNewState = (state) => state) => {
+    let current = getCurrent();
+
+    const currentState = current.state[name];
+
+    const newState = getNewState(currentState);
+
+    setCurrent({
+      ...current,
+      state: {
+        ...current.state,
+        [name]: newState,
+      },
+    });
+  };
 
   const public = {
-    push,
-    remove,
+    getHistory,
+    setHistory,
+    getState,
+    setState,
   };
 
   return Object.freeze(public);

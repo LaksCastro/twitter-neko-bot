@@ -34,14 +34,14 @@ const AutomaticReplyFactory = () => {
 
   // ===========================================================================================
   // This function enable a listener for to send automatic reply when anyone mark the bot in a tweet, thus:
-  // ~ le me (@UserName) in Twitter: "Woooow, this bot @WaifuAwesomeBot is working in a code with Factory Pattern"
+  // ~ le me (@UserName) in Twitter: "Woooow, this bot @2DPixivArt is working in a code with Factory Pattern"
   // ~ le bot listen and reply: "@UserName #StayInHome" with a lendary image ;)
   // ===========================================================================================
   const enable = () => {
     client = get();
 
     const stream = client.stream("statuses/filter", {
-      track: ["@WaifuAwesomeBot"],
+      track: ["@2DPixivArt", "@2DPixivArt", "#2DPixivArt", "#2DPixivArt"],
     });
 
     stream.on("tweet", onUserQuoteBot);

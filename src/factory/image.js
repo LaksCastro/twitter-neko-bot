@@ -37,7 +37,10 @@ const ImageApiFactory = () => {
 
     const result = await Api.generateResult(response);
 
-    History.push(result);
+    History.setHistory((currentHistory) => [
+      ...currentHistory,
+      { ...result, date: new Date().toString() },
+    ]);
 
     return result;
   };
