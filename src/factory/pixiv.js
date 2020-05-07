@@ -1,7 +1,8 @@
 const path = require("path");
-const { random } = require("../utils");
 
 const PixivApiFactory = () => {
+  const { random } = require("../utils");
+
   const DownloadFactory = require("./download");
   const Download = DownloadFactory();
 
